@@ -13,4 +13,4 @@ pillsRouter.patch("/", controllers.changeById);
 pillsRouter.delete("/", controllers.deleteById);
 
 // export to app
-module.exports = pilsRouter;
+module.exports = pillsRouter;

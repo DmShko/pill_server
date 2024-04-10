@@ -1,0 +1,9 @@
+[
+    {
+       "doctor": {"name": "", "phone": "", "workTime": ""},
+       "clinic": {"name": "", "phone": "", "workTime": ""},
+       "create": "",
+       "status": [],
+       "pills": []
+    }
+]
