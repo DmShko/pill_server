@@ -1,6 +1,6 @@
 const express = require('express');
 
-const controllers = require('../../controllers/pills');
+const controllers = require('../../controllers/priscription');
 
 // create most routes
 const pillsRouter = express.Router();

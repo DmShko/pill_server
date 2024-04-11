@@ -2,8 +2,9 @@ const express = require('express');
 const cors = require('cors');
 // const logger = require('morgan'); print information about request to console
 // search .env
-require('dotenv').config();
 
+// add data to environment variebles from .env file
+require('dotenv').config();
 
 // import routers
 const pillsRouter = require('./routes/api/pills');
@@ -36,5 +37,5 @@ pills.use((err, req, res, next) => {
     });
   });
   
-  // export 'temp_map' veb-server
+// export 'temp_map' veb-server
 module.exports = pills;
