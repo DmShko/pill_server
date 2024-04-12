@@ -4,7 +4,7 @@ const { HttpError, ctrlWrapper } = require("../helpers");
 
 const getAll = async (req, res) => {
 
-    const { _id } = req.user; 
+    // const { _id } = req.user; 
 
     const result = await Prescription.find({owner: _id});
 
@@ -27,7 +27,7 @@ const getById = async (req, res) => {
 const addById = async (req, res) => {
 
     const { body } = req;
-    const { error } = checkShema.validate(body);
+    const { error } = schemas.prescriptionShema.validate(body);
 
     // check body data second variant
     if (error) {
@@ -56,7 +56,7 @@ const updateById = async (req, res) => {
     const { prescriptionId } = req.params;
 
     const { body } = req;
-    const { error } = checkShema.validate(body);
+    const { error } = schemas.prescriptionShema.validate(body);
 
     if (error) {
       throw HttpError(
