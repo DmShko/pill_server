@@ -1,11 +1,10 @@
 const express = require('express');
 
 // joi schemas
-const schemas = require('../schemas');
-const validateBody = require('../../middlewares');
-const authentificate = require('../../middlewares');
+const schemas = require('../../schemas');
+const { authentificate, validateBody } = require('../../middlewares');
 
-const controllers = require('../../controllers/prescription');
+const controllers = require('../../controllers/auth');
 
 // create most routes
 const authRouter = express.Router();
@@ -27,9 +26,6 @@ authRouter.post("/logout", authentificate, controllers.logout);
 
 // get current user
 authRouter.get("/current", authentificate, controllers.getCurrent);
-
-// get current user
-authRouter.patch("/subscription", authentificate, validateBody(schemas.checkSchemaSubscription), controllers.updateSubscriptionUser);
 
 // export to app
 module.exports = authRouter;

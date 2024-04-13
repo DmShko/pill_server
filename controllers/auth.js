@@ -10,12 +10,14 @@ const { SECRET_KEY, BASE_URL, GOOGLE_PASSWORD } = process.env;
 
 const User = require("../models/user");
 
+const schemas = require("../schemas");
+
 const signup = async (req, res) => {
     
     const { body } = req;
     const { email, password } = req.body;
     const { error } = schemas.checkRegister.validate(body);
-
+  
     // for create unique 409 message. Does base have sach email?
     const user = await User.findOne({email});
     // if sach email exist
@@ -70,7 +72,6 @@ const signup = async (req, res) => {
     res.status(201).json({
         user:{
             email: newUser.email,
-            subscription: newUser.subscription
         }
     });
    
@@ -168,11 +169,10 @@ const login = async (req, res) => {
 
 const getCurrent = (req, res) => {
 
-    const { email, subscription } = req.user;
+    const { email } = req.user;
   
     res.status(200).json({
         email: email,
-        subscription: subscription,
     });
   
 };
@@ -189,41 +189,11 @@ const logout = async(req, res) => {
   
 };
 
-const updateSubscriptionUser = async (req, res) => {
-   
-    const { _id } = req.user;
-    const { body } = req;
-    const { error } = schemas.checkShemaSubscription.validate(body);
-    
-
-    if (error) {
-      throw HttpError(
-        400,
-        `missing ${error.message
-          .split(" ")
-          .filter(
-            (value) =>
-              value !== "is" && value !== "required" && value !== "field"
-          )} field`
-      );
-    }
-  
-    // Replace the value of the "favorite" ($set operator) field or add it if it does not exist
-    const result = await User.updateOne({_id: _id},{$set:{subscription: body.subscription}});
-  
-    if (result === null) {
-      throw HttpError(404, "Not found");
-    }
-    res.status(200).json(await User.findById(_id));
-  
-}
-
 module.exports = {
     signup: ctrlWrapper(signup),
     login: ctrlWrapper(login),
     logout: ctrlWrapper(logout),
     getCurrent: ctrlWrapper(getCurrent),
-    updateSubscriptionUser: ctrlWrapper(updateSubscriptionUser),
     verifyEmail: ctrlWrapper(verifyEmail),
     resendVerifyEmail: ctrlWrapper(resendVerifyEmail),
 };

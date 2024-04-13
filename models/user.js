@@ -10,7 +10,7 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        match: /\w{0}[a-zA-Za-яА-Я]+\d{0}[0-9]+\@\w{0}[a-zA-Za-яА-Я]+\.\w{0}[a-zA-Za-яА-Я]/,
+        match: /\w{0}[0-9a-zA-Za-яА-Я]+@\w{0}[0-9a-zA-Za-яА-Я]+\.\w{0}[0-9a-zA-Za-яА-Я]/,
         unique: true,
         required: [true, 'Email is required'],
     },
@@ -35,7 +35,7 @@ const userSchema = new Schema({
     versionKey: false, timestamps: true, // Disable version stamp
 });
 
-userSchema.post("save", handleMongooseError);
+userSchema.post("save", handleMongooseError); // filter DB error
 
 // create model : 1st argument - collection name
 const User = model('user', userSchema);

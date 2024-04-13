@@ -9,7 +9,7 @@ const { SECRET_KEY } = process.env;
 // or use passport (passport jwt)
 const authentificate = async (req, res, next) => {
     const { authorization = '' } = req.headers;
-    const [ bearer, token] = authorization.split(' ');
+    const [ bearer, token ] = authorization.split(' ');
 
     if(bearer !== 'Bearer') next(HttpError(401, "Incorrect token"));
    
@@ -23,7 +23,7 @@ const authentificate = async (req, res, next) => {
         const user = await User.findById(id);
        
         // no user || no 'token' in DB || 'toke' value is not equal to 'token' in DB
-        if(!user || !user.token || user.token !== token) {
+        if(!user || !user.token || user.token !== token) { // person login on other devices (auto logout)
             next(HttpError(401, "Not authorized"));
         }
 

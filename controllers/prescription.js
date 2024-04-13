@@ -1,12 +1,16 @@
 // import model
-const Prescription = require('../model/prescription');
+const Prescription = require('../models/prescription');
 const { HttpError, ctrlWrapper } = require("../helpers");
+
+const schemas = require("../schemas");
 
 const getAll = async (req, res) => {
 
-    // const { _id } = req.user; 
+    const { _id } = req.user; // see authentificate.js 31 row
 
-    const result = await Prescription.find({owner: _id});
+    const result = await Prescription.find({owner: _id}, '-createdAt -updatedAt');
+    // '-createdAt -updatedAt' - for not response 'create' and 'update' fields
+    //.populate('owner') - if need responce detail information instead only id
 
     res.status(200).json(result);
 
@@ -14,7 +18,7 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
 
-    const { _id } = req.user; 
+    const { _id } = req.user; // see authentificate.js 31 row
     const { prescriptionId } = req.params;
     const result = await Prescription.find({owner: _id, _id: prescriptionId});
 

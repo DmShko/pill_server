@@ -23,6 +23,11 @@ const priscriptionSchem = new Schema({
         type: [String],
         required: [true, 'Pills is required'],
     },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'user', // collection name
+        require: true,
+    },
 }, {versionKey: false, timestamps: true,});
 
 priscriptionSchem.post("save", handleMongooseError);
