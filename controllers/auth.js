@@ -6,6 +6,7 @@ const {nanoid} = require("nanoid");
 
 const { HttpError, ctrlWrapper, sendEmail } = require("../helpers");
 
+//!!! GOOGLE_PASSWORD - app password!) Infirst, create 2-level guard and then generate app password there!!!
 const { SECRET_KEY, BASE_URL, GOOGLE_PASSWORD } = process.env;
 
 const User = require("../models/user");
@@ -43,10 +44,10 @@ const signup = async (req, res) => {
     const nodemailerConfig = {
         service: "Gmail",
         host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
+        port: 465, //465 or 25 or 2525. 465 - protected port
+        secure: true, // on crypt
         auth: {
-            user: 'dmitry.schevchenko.work@gmail.com',
+            user: 'medicine2024.service@gmail.com',
             pass: GOOGLE_PASSWORD,
         },
     };
@@ -54,14 +55,14 @@ const signup = async (req, res) => {
     // create transporter object
     const transporter = nodemailer.createTransport(nodemailerConfig);
 
-    const verifyEmail = {
+    const verify = {
         to: email,
-        from: 'dmitry.schevchenko.work@gmail.com',
+        from: 'medicine2024.service@gmail.com',
         subject: "Verify email",
         html: `<a target="_blank" href="${BASE_URL}/api/auth/verify/${verificationCode}">Click verify email</a>`,
     };
 
-    transporter.sendMail(verifyEmail).then(() => 
+    transporter.sendMail(verify).then(() => 
         console.log('Email send successfuly')
     )
     .catch( error =>
@@ -77,6 +78,7 @@ const signup = async (req, res) => {
    
 };
 
+// get from link in user mail
 const verifyEmail = async (req, res) => {
 
     const { verificationCode } = req.params;
@@ -97,7 +99,7 @@ const verifyEmail = async (req, res) => {
 const resendVerifyEmail = async (req, res) => {
     const { body } = req;
     const { email } = req.body;
-    const { error } = schemas.emailShema.validate(body);
+    const { error } = schemas.emailSchema.validate(body);
 
     // ather error message (from frontend)
     if (error) {
@@ -113,13 +115,35 @@ const resendVerifyEmail = async (req, res) => {
 
     if(user.verify) throw HttpError(401, "User already verified");
 
-    const verifyEmail = {
+    // configuration
+    const nodemailerConfig = {
+        service: "Gmail",
+        host: 'smtp.gmail.com',
+        port: 465, //465 or 25 or 2525. 465 - protected port
+        secure: true, // on crypt
+        auth: {
+            user: 'medicine2024.service@gmail.com',
+            pass: GOOGLE_PASSWORD,
+        },
+    };
+
+    // create transporter object
+    const transporter = nodemailer.createTransport(nodemailerConfig);
+
+    const verify = {
         to: email,
+        from: 'dmitry.schevchenko.work@gmail.com',
         subject: "Verify email",
         html: `<a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>`,
     };
 
-    await sendEmail(verifyEmail);
+    transporter.sendMail(verify).then(() => 
+        console.log('Email send successfuly')
+    )
+    .catch( error =>
+        console.log(error.message)
+    );
+    /*******************for nodemailer end*********** */
 
     res.json({
         message: "Email verify success"
@@ -145,6 +169,7 @@ const login = async (req, res) => {
 
     if(!user) throw HttpError(401, "Email or password wrong");
 
+    // if email comfirm
     if(!user.verify) throw HttpError(401, "Email isn't verified");
 
     // check email that enter password invalid

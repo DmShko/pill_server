@@ -3,7 +3,7 @@ const {Schema, model} = require('mongoose');
 const { handleMongooseError } = require("../helpers");
 
 // add mongoose schem
-const priscriptionSchem = new Schema({
+const prescriptionSchem = new Schema({
     doctor: {
         type: { name: String, phone: String, workTime: String},
         required: false,
@@ -30,9 +30,9 @@ const priscriptionSchem = new Schema({
     },
 }, {versionKey: false, timestamps: true,});
 
-priscriptionSchem.post("save", handleMongooseError);
+prescriptionSchem.post("save", handleMongooseError);
 
-// create model on 'priscriptionSchem' base
-const Priscription = model('priscription', priscriptionSchem);
+// create model on 'prescriptionSchem' base
+const Prescription = model('prescription', prescriptionSchem);
 
-module.exports = Priscription;
+module.exports = Prescription;

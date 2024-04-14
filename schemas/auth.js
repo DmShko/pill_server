@@ -8,6 +8,7 @@ const checkRegister = Joi.object({
 
 });
 
+// for reverificate email
 const emailSchema = Joi.object({
     email: Joi.string().pattern(/\w{0}[0-9a-zA-Za-яА-Я]+@\w{0}[0-9a-zA-Za-яА-Я]+\.\w{0}[0-9a-zA-Za-яА-Я]/).required(),
 });
