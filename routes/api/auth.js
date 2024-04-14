@@ -16,7 +16,7 @@ authRouter.post("/signup", validateBody(schemas.checkRegister), controllers.sign
 authRouter.post("/signin", validateBody(schemas.checkLogin), controllers.login);
 
 // verificate (get reg from user email)
-authRouter.get("/verify/:verificationCode", validateBody(schemas.emailSchema), controllers.verifyEmail);
+authRouter.get("/verify/:verificationCode", controllers.verifyEmail);
 
 // verify againe if the letter did not arrive
 authRouter.post("/verify", validateBody(schemas.emailSchema), controllers.resendVerifyEmail);
