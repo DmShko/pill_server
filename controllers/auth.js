@@ -146,7 +146,7 @@ const resendVerifyEmail = async (req, res) => {
     /*******************for nodemailer end*********** */
 
     res.json({
-        message: "Email verify success"
+        message: `Verify mail send to email${email}`,
     });
 };
 
