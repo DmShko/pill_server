@@ -4,13 +4,39 @@ const { handleMongooseError } = require("../helpers");
 
 // add mongoose schem
 const prescriptionSchem = new Schema({
-    doctor: {
-        type: { name: String, phone: String, workTime: String},
+    _id: {
+        type: String,
         required: false,
     },
-    clinic: {
-        type: { name: String, phone: String, workTime: String},
+    courseName: {
+        type: String,
         required: false,
+        default: '',
+    },
+    doctorName: {
+        type: String,
+        required: false,
+        default: '',
+    },
+    docContacts: {
+        type: String,
+        required: false,
+        default: '',
+    },
+    clinicName: {
+        type: String,
+        required: false,
+        default: '',
+    },
+    clinicContacts: {
+        type: String,
+        required: false,
+        default: '',
+    },
+    visitDate: {
+        type: String,
+        required: false,
+        default: '',
     },
     created: String,
     status: {
@@ -19,8 +45,13 @@ const prescriptionSchem = new Schema({
         required: [true, 'Status is required'],
         default: 'not done',
     },
+    selected: {
+        type: Boolean,
+        required: false,
+        default: '',
+    },
     pills: {
-        type: [String],
+        type: [Object],
         required: [true, 'Pills is required'],
     },
     owner: {

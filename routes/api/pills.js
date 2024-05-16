@@ -9,9 +9,9 @@ const schemas = require('../../schemas');
 // create most routes
 const pillsRouter = express.Router();
 
-pillsRouter.get("/", controllers.getAll);
-pillsRouter.get("/:id", controllers.getById);
-pillsRouter.post("/:id", authentificate, validateBody(schemas.prescriptionSchema), controllers.addById);
+pillsRouter.get("/", authentificate, controllers.getAll);
+pillsRouter.get("/:id", authentificate, controllers.getById);
+pillsRouter.post("/", authentificate, validateBody(schemas.prescriptionSchema), controllers.addById);
 pillsRouter.put("/:id", authentificate, validateBody(schemas.prescriptionSchema), controllers.updateById);
 pillsRouter.patch("/:id", authentificate, validateBody(schemas.prescriptionSchema), controllers.changeById);
 pillsRouter.delete("/", authentificate, validateBody(schemas.prescriptionSchema), controllers.deleteById);
