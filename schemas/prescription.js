@@ -22,4 +22,20 @@ const prescriptionSchema = Joi.object({
 });
 // clinic: Joi.object({name: Joi.string(), phone: Joi.string(), workTime: Joi.string(),}),
 
-module.exports = prescriptionSchema;
+const patchSchema = Joi.object({
+  prop: Joi.alternatives().try(
+    Joi.boolean(),
+    Joi.string(), 
+    Joi.array().items(Joi.object({id: Joi.string(),
+    pillName: Joi.string().empty(''),
+    perDay: Joi.string().empty(''),
+    startMonth: Joi.string().empty(''),
+    startDay: Joi.string().empty(''),
+    quantity: Joi.string().empty(''),
+    duration: Joi.string().empty(''),
+    description: Joi.string().empty(''),
+    selectedPill: Joi.boolean()}))),
+  key: Joi.string(),
+});
+
+module.exports = { prescriptionSchema, patchSchema};

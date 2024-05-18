@@ -1,14 +1,14 @@
 // import model
-const Prescription = require('../models/prescription');
+const Statistic = require('../models/statistic');
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const schemas = require("../schemas");
 
-const getAll = async (req, res) => {
+const getStatisticAll = async (req, res) => {
 
   const { _id } = req.user; // see authentificate.js 31 row
 
-  const result = await Prescription.find({owner: _id}, '-createdAt -updatedAt');
+  const result = await Statistic.find({owner: _id}, '-createdAt -updatedAt');
   // '-createdAt -updatedAt' - for not response 'create' and 'update' fields
   //.populate('owner') - if need responce detail information instead only id
 
@@ -16,11 +16,12 @@ const getAll = async (req, res) => {
 
 };
 
-const getById = async (req, res) => {
+const getStatisticById = async (req, res) => {
 
     const { _id } = req.user; // see authentificate.js 31 row
     const { prescriptionId } = req.params;
-    const result = await Prescription.find({owner: _id, _id: prescriptionId});
+
+    const result = await Statistic.find({owner: _id, _id: prescriptionId});
 
     if (result === null || result.length === 0) throw HttpError(404, "Not found");
       
@@ -28,11 +29,11 @@ const getById = async (req, res) => {
 
 };
 
-const addById = async (req, res) => {
-    
+const addStatistic = async (req, res) => {
+  
     const { body } = req;
-    const { error } = schemas.prescriptionSchema.validate(body.data);
-
+    const { error } = schemas.statisticSchema.validate(body.data);
+   
     // check body data second variant
     if (error) {
       
@@ -49,19 +50,19 @@ const addById = async (req, res) => {
    
     const { _id } = req.user; 
 
-    const result = await Prescription.create({...body.data, owner: _id});
+    const result = await Statistic.create({...body.data, owner: _id});
 
     res.status(201).json(result);
 
 };
 
-const updateById = async (req, res) => {
+const updateStatisticById = async (req, res) => {
 
     const { _id } = req.user;
     const { prescriptionId } = req.params;
 
     const { body } = req;
-    const { error } = schemas.prescriptionSchema.validate(body);
+    const { error } = schemas.statisticSchema.validate(body);
 
     if (error) {
       throw HttpError(
@@ -76,7 +77,7 @@ const updateById = async (req, res) => {
     }
 
     // find by 'owner' and id and update
-    const result = await Prescription.findOneAndUpdate({owner: _id, _id: prescriptionId}, body, {new: true});
+    const result = await Statistic.findOneAndUpdate({owner: _id, _id: prescriptionId}, body, {new: true});
 
     if (result === null) {
       throw HttpError(404, "Not found");
@@ -85,13 +86,13 @@ const updateById = async (req, res) => {
 
 };
 
-const changeById = async (req, res) => {
+const changeStatisticById = async (req, res) => {
    
     const { _id } = req.user; 
     const { id } = req.query;
    
     const { body } = req;
-    const { error } = schemas.patchSchema.validate(body.data);
+    const { error } = schemas.statisticSchema.validate(body.data);
     
     if (error) {
       throw HttpError(
@@ -106,7 +107,7 @@ const changeById = async (req, res) => {
     }
 
     // Replace the value of the ($set operator) field or add it if it does not exist
-    const result = await Prescription.findOneAndUpdate({owner: _id, _id: id},{$set:{[body.data.key]: body.data.prop}});
+    const result = await Statistic.findOneAndUpdate({owner: _id, _id: id},{$set:{[body.data.key]: body.data.prop}});
 
     if (result === null) {
       throw HttpError(404, "Not found");
@@ -115,15 +116,15 @@ const changeById = async (req, res) => {
     
 };
 
-const deleteById = async (req, res) => {
+const deleteStatisticById = async (req, res) => {
   
     const { _id } = req.user; 
     
     const { id } = req.query;
     
-    const courseName = await Prescription.findOne({owner: _id, _id: id});
+    const courseName = await Statistic.findOne({owner: _id, _id: id});
     // find by owner and id and delete
-    const result = await Prescription.findOneAndDelete({owner: _id, _id: id});
+    const result = await Statistic.findOneAndDelete({owner: _id, _id: id});
 
     if (result === null) {
      
@@ -134,10 +135,10 @@ const deleteById = async (req, res) => {
 };
 
 module.exports = {
-    getAll: ctrlWrapper(getAll),
-    getById: ctrlWrapper(getById),
-    addById: ctrlWrapper(addById),
-    updateById: ctrlWrapper(updateById),
-    changeById: ctrlWrapper(changeById),
-    deleteById: ctrlWrapper(deleteById),
+    getStatisticAll: ctrlWrapper(getStatisticAll),
+    getStatisticById: ctrlWrapper(getStatisticById),
+    addStatistic: ctrlWrapper(addStatistic),
+    updateStatisticById: ctrlWrapper(updateStatisticById),
+    changeStatisticById: ctrlWrapper(changeStatisticById),
+    deleteStatisticById: ctrlWrapper(deleteStatisticById),
 };

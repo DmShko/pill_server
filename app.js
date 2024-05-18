@@ -9,6 +9,7 @@ require('dotenv').config();
 // import routers
 const pillsRouter = require('./routes/api/pills');
 const authRouter = require('./routes/api/auth');
+const statisticRouter = require('./routes/api/statistic');
 
 // create server 'pills'
 const pills = express();
@@ -26,6 +27,7 @@ pills.use(express.static('public'));
 //on each get typeof '/api/pills' go to 'pillsRouter'
 pills.use('/api/auth', authRouter);
 pills.use('/api/pills', pillsRouter);
+pills.use('/api/statistic', statisticRouter);
 
 pills.use((req, res) => {
     res.status(404).json({message: 'Not found'});
