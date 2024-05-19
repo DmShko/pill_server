@@ -1,19 +1,41 @@
 const {Schema, model} = require('mongoose');
 
 const { handleMongooseError } = require("../helpers");
+// const { boolean } = require('joi');
 
 // add mongoose schem
 const statisticSchem = new Schema({
-   
-    pillName: {
+
+    _id: {
         type: String,
         required: [true, '_id is required'],
     },
 
-    day: {
-        type: Object,
-        required: [true, 'Pill is required'],
+    pillName: {
+        type: String,
+        required: [true, 'pillName is required'],
     },
+
+    dateNumber: {
+        type: String,
+        required: [true, 'dateNumber is required'],
+    },
+
+    month: {
+        type: String,
+        required: [true, 'month is required'],
+    },
+
+    done: {
+        type: Number,
+        required: [true, 'done is required'],
+    },
+
+    status: {
+        type: Boolean,
+        required: [true, 'status is required'],
+    },
+
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'user', // collection name

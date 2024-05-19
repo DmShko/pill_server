@@ -5,7 +5,7 @@ const {
 } = require("./auth");
 
 const { prescriptionSchema, patchSchema } = require('./prescription');
-const { statisticSchema } = require('./statistic');
+const { statisticSchema, patchStatisticSchema } = require('./statistic');
 
 module.exports = {
     checkRegister,
@@ -14,4 +14,5 @@ module.exports = {
     prescriptionSchema,
     statisticSchema,
     patchSchema,
+    patchStatisticSchema,
 };

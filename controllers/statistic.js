@@ -30,7 +30,7 @@ const getStatisticById = async (req, res) => {
 };
 
 const addStatistic = async (req, res) => {
-  
+
     const { body } = req;
     const { error } = schemas.statisticSchema.validate(body.data);
    
@@ -87,12 +87,12 @@ const updateStatisticById = async (req, res) => {
 };
 
 const changeStatisticById = async (req, res) => {
-   
+  
     const { _id } = req.user; 
     const { id } = req.query;
    
     const { body } = req;
-    const { error } = schemas.statisticSchema.validate(body.data);
+    const { error } = schemas.patchStatisticSchema.validate(body.data);
     
     if (error) {
       throw HttpError(
@@ -105,11 +105,12 @@ const changeStatisticById = async (req, res) => {
           )} field`
       );
     }
-
+   
     // Replace the value of the ($set operator) field or add it if it does not exist
-    const result = await Statistic.findOneAndUpdate({owner: _id, _id: id},{$set:{[body.data.key]: body.data.prop}});
-
+    const result = await Statistic.findOneAndUpdate({owner: _id, _id: id},{$set:{[body.data.key]: body.data.value}});
+     
     if (result === null) {
+     
       throw HttpError(404, "Not found");
     }
     res.status(200).json(result);

@@ -1,9 +1,16 @@
 const Joi = require("joi");
 
-const statisticSchema = Joi.object({pillName: Joi.string(), day: Joi.object({position: Joi.string(),
+const statisticSchema = Joi.object({_id: Joi.string(), pillName: Joi.string(), 
   dateNumber: Joi.string(),
   month: Joi.string(),
   done: Joi.number(),
-  status: Joi.boolean()}),});
+  status: Joi.boolean()});
 
-module.exports = {statisticSchema};
+  const patchStatisticSchema = Joi.object({
+    
+    key: Joi.string(),
+    value: Joi.number(),
+
+  });
+
+module.exports = {statisticSchema, patchStatisticSchema};
