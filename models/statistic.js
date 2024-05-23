@@ -36,6 +36,11 @@ const statisticSchem = new Schema({
         required: [true, 'status is required'],
     },
 
+    reschedule: {
+        type: Boolean,
+        required: [true, 'reschedule is required'],
+    },
+
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'user', // collection name

@@ -41,7 +41,7 @@ const prescriptionSchem = new Schema({
     created: String,
     status: {
         type: [String],
-        enum: ['done', 'suspended', 'not done'],
+        enum: ['done', 'not active', 'not done'],
         required: [true, 'Status is required'],
         default: 'not done',
     },

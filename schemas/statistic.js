@@ -4,7 +4,8 @@ const statisticSchema = Joi.object({_id: Joi.string(), pillName: Joi.string(),
   dateNumber: Joi.string(),
   month: Joi.string(),
   done: Joi.number(),
-  status: Joi.boolean()});
+  status: Joi.boolean(),
+  reschedule: Joi.boolean(),});
 
   const patchStatisticSchema = Joi.object({
     
