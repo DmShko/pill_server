@@ -97,10 +97,11 @@ const verifyEmail = async (req, res) => {
 };
 
 const resendVerifyEmail = async (req, res) => {
+   
     const { body } = req;
-    const { email } = req.body;
-    const { error } = schemas.emailSchema.validate(body);
-
+    const { email } = req.body.data;
+    const { error } = schemas.emailSchema.validate(body.data);
+   
     // ather error message (from frontend)
     if (error) {
         throw HttpError(
@@ -110,11 +111,11 @@ const resendVerifyEmail = async (req, res) => {
     }
 
     const user = await User.findOne({email});
-
+   
     if(!user) throw HttpError(401, "Email not found");
-
+  
     if(user.verify) throw HttpError(401, "User already verified");
-
+    
     // configuration
     const nodemailerConfig = {
         service: "Gmail",
