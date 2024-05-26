@@ -10,6 +10,7 @@ require('dotenv').config();
 const pillsRouter = require('./routes/api/pills');
 const authRouter = require('./routes/api/auth');
 const statisticRouter = require('./routes/api/statistic');
+const descriptionRouter = require('./routes/api/description');
 
 // create server 'pills'
 const pills = express();
@@ -28,6 +29,7 @@ pills.use(express.static('public'));
 pills.use('/api/auth', authRouter);
 pills.use('/api/pills', pillsRouter);
 pills.use('/api/statistic', statisticRouter);
+pills.use('/api/description', descriptionRouter);
 
 pills.use((req, res) => {
     res.status(404).json({message: 'Not found'});
