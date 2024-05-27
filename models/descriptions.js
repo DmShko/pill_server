@@ -8,14 +8,34 @@ const descriptionSchem = new Schema({
         type: String,
         required: true,
     },
+    descriptionPillName: {
+        type: String,
+        required: true,
+        default: '',
+    },
     descriptionName: {
+        type: String,
+        required: true,
+        default: '',
+    },
+    descriptionPer: {
+        type: String,
+        required: true,
+        default: '',
+    },
+    descriptionQuan: {
+        type: String,
+        required: true,
+        default: '',
+    },
+    descriptionDur: {
         type: String,
         required: true,
         default: '',
     },
     description: {
         type: String,
-        required: true,
+        required: false,
         default: '',
     },
     selected: {

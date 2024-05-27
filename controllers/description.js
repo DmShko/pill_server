@@ -48,7 +48,7 @@ const addDescription = async (req, res) => {
     }
    
     const { _id } = req.user; 
-    console.log(_id)
+  
     const result = await Descriptions.create({...body.data, owner: _id});
 
     res.status(201).json(result);
