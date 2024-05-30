@@ -10,7 +10,7 @@ const descriptionSchem = new Schema({
     },
     descriptionPillName: {
         type: String,
-        required: true,
+        required: false,
         default: '',
     },
     descriptionName: {
@@ -20,17 +20,17 @@ const descriptionSchem = new Schema({
     },
     descriptionPer: {
         type: String,
-        required: true,
+        required: false,
         default: '',
     },
     descriptionQuan: {
         type: String,
-        required: true,
+        required: false,
         default: '',
     },
     descriptionDur: {
         type: String,
-        required: true,
+        required: false,
         default: '',
     },
     description: {

@@ -14,7 +14,7 @@ statisticRouter.get("/:id", authentificate, controllers.getStatisticById);
 statisticRouter.post("/", authentificate, validateBody(schemas.statisticSchema), controllers.addStatistic);
 statisticRouter.put("/:id", authentificate, validateBody(schemas.statisticSchema), controllers.updateStatisticById);
 statisticRouter.patch("/", authentificate, validateBody(schemas.patchStatisticSchema), controllers.changeStatisticById);
-statisticRouter.delete("/:id", authentificate, validateBody(schemas.statisticSchema), controllers.deleteStatisticById);
+statisticRouter.delete("/", authentificate, validateBody(schemas.statisticSchema), controllers.deleteStatisticById);
 
 // export to app
 module.exports = statisticRouter;

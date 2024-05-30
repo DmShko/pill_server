@@ -121,7 +121,7 @@ const deleteById = async (req, res) => {
     
     const { id } = req.query;
     
-    const courseName = await Prescription.findOne({owner: _id, _id: id});
+    const course = await Prescription.findOne({owner: _id, _id: id});
     // find by owner and id and delete
     const result = await Prescription.findOneAndDelete({owner: _id, _id: id});
 
@@ -130,7 +130,7 @@ const deleteById = async (req, res) => {
       throw HttpError(404, "Not found");
     }
 
-    res.status(200).json({ message: `Prescription ${courseName.courseName} deleted` });
+    res.status(200).json({ message: `Prescription ${course.courseName} deleted` });
 };
 
 module.exports = {

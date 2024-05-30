@@ -17,6 +17,7 @@ const prescriptionSchema = Joi.object({
     startDay: Joi.string().empty(''),
     quantity: Joi.string().empty(''),
     duration: Joi.string().empty(''),
+    frozyDuration: Joi.string().allow(''),
     description: Joi.string().empty(''),
     selectedPill: Joi.boolean()})),
 });
@@ -33,6 +34,7 @@ const patchSchema = Joi.object({
     startDay: Joi.string().empty(''),
     quantity: Joi.string().empty(''),
     duration: Joi.string().empty(''),
+    frozyDuration: Joi.string().allow(''),
     description: Joi.string().empty(''),
     selectedPill: Joi.boolean()}))),
   key: Joi.string(),

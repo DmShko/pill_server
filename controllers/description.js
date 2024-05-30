@@ -51,7 +51,7 @@ const addDescription = async (req, res) => {
   
     const result = await Descriptions.create({...body.data, owner: _id});
 
-    res.status(201).json(result);
+    res.status(201).json({ message: `Created` });
 
 };
 
@@ -82,7 +82,7 @@ const updateDescriptionById = async (req, res) => {
     if (result === null) {
       throw HttpError(404, "Not found");
     }
-    res.status(201).json(result);
+    res.status(201).json({ message: `Description ${result.descriptionName} updated` });
 
 };
 
