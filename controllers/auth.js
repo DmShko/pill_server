@@ -59,26 +59,7 @@ const signup = async (req, res) => {
         to: email,
         from: 'medicine2024.service@gmail.com',
         subject: "Verify email",
-        html: `
-        <head>
-
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        </head>
-        <body>
-
-            <p>Verify email</p>
-                <img src="cid:bottle" alt='Medicine logo' width='400px' height='200px'>
-            <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
-          
-        </body>
-        `,
-        attachments: [{
-            filename: 'verify.jpg',
-            path: `${__dirname}/images/verify.jpg`,
-            cid: 'bottle' //same cid value as in the html img src
-        }]
+        html: `<a target="_blank" href="${BASE_URL}/api/auth/verify/${verificationCode}">Click verify email</a>`,
     };
 
     transporter.sendMail(verify).then(() => 
