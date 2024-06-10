@@ -149,7 +149,7 @@ const resendVerifyEmail = async (req, res) => {
                     font-size: 18px;
                 }
 
-                svg {
+                img {
                     width: 100px;
                     height: 100px;
                 }
@@ -164,7 +164,7 @@ const resendVerifyEmail = async (req, res) => {
         <body>
 
             <h1>Verify email</h1>
-            <svg src="cid:bottle" alt='Medicine logo' border='0' width='100px' height='100px'>
+            <img src="cid:bottle" alt='Medicine logo' border='0' width='100px' height='100px'>
             <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
 
         </body>
@@ -184,6 +184,37 @@ const resendVerifyEmail = async (req, res) => {
     );
     /*******************for nodemailer end*********** */
 
+    res.json({
+        message: `Verify mail send to email${email}`,
+    });
+};
+
+const forgotVerifyEmail = async (req, res) => {
+   
+    const { body } = req;
+    const { email } = req.body.data;
+    const { password } = req.body.data;
+    const { error } = schemas.emailSchema.validate(body.data);
+   
+    // ather error message (from frontend)
+    if (error) {
+        throw HttpError(
+            400,
+            'Joi validation error'
+        );
+    }
+
+    const user = await User.findOne({email});
+   
+    if(!user) throw HttpError(401, "Email not found");
+  
+    const result = await User.findOneAndUpdate({owner: _id, _id: id},{$set:{password: password}});
+
+    if (result === null) {
+      throw HttpError(404, "Not found");
+    }
+    res.status(200).json(result);
+ 
     res.json({
         message: `Verify mail send to email${email}`,
     });
@@ -260,4 +291,5 @@ module.exports = {
     getCurrent: ctrlWrapper(getCurrent),
     verifyEmail: ctrlWrapper(verifyEmail),
     resendVerifyEmail: ctrlWrapper(resendVerifyEmail),
+    forgotVerifyEmail: ctrlWrapper(forgotVerifyEmail),
 };
