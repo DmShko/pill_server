@@ -151,7 +151,7 @@ const resendVerifyEmail = async (req, res) => {
         </body>
         `,
         attachments: [{
-            filename: 'medical-history-doctor-svgrepo-com.svg',
+            filename: 'verify.jpg',
             path: `${__dirname}/images/verify.jpg`,
             cid: 'bottle' //same cid value as in the html img src
         }]
