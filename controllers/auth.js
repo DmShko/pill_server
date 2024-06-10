@@ -260,5 +260,4 @@ module.exports = {
     getCurrent: ctrlWrapper(getCurrent),
     verifyEmail: ctrlWrapper(verifyEmail),
     resendVerifyEmail: ctrlWrapper(resendVerifyEmail),
-    forgotVerifyEmail: ctrlWrapper(forgotVerifyEmail),
 };
