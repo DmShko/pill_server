@@ -144,32 +144,15 @@ const resendVerifyEmail = async (req, res) => {
         </head>
         <body>
 
-            <h1 style{{fontSize: '18px', fontWeight: '600', color: 'orange'}}>Verify email</h1>
-                <img src="cid:bottle" alt='Medicine logo' width='100px' height='100px'>
+            <p>Verify email</p>
+                <img src="cid:bottle" alt='Medicine logo' width='400px' height='200px'>
             <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
-            <style>
-
-                h1 {
-                    color: gray; 
-                    font-weight: 600; 
-                    font-size: 18px;
-                }
-
-                img {
-                    width: 100px;
-                    height: 100px;
-                }
-
-                a {
-                    color: orange;
-                }
-
-            </style>
+          
         </body>
         `,
         attachments: [{
             filename: 'medical-history-doctor-svgrepo-com.svg',
-            path: `${__dirname}/images/medical-history-doctor-svgrepo-com.svg`,
+            path: `${__dirname}/images/verify.jpg`,
             cid: 'bottle' //same cid value as in the html img src
         }]
     };
