@@ -164,7 +164,9 @@ const resendVerifyEmail = async (req, res) => {
         <body>
 
             <h1 style{{fontSize: '18px', fontWeight: '600', color: 'orange'}}>Verify email</h1>
-            <svg src="cid:bottle" alt='Medicine logo' width='100px' height='100px'>
+            <image width="200" height="200">
+                <svg src="cid:bottle" alt='Medicine logo' width='100px' height='100px'>
+            </image>
             <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
 
         </body>
