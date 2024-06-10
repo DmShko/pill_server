@@ -134,8 +134,13 @@ const resendVerifyEmail = async (req, res) => {
     const verify = {
         to: email,
         from: 'dmitry.schevchenko.work@gmail.com',
+        title: 'Medicine service',
         subject: "Verify email",
-        html: `<a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>`,
+        html: `
+        <h1 style={{color: 'gray', fontWeight: '600', fontSize: '18px'}}>Verify email</h1>
+        <img src="../images/medical-history-doctor-svgrepo-com.svg" width='100px' height='100px'>
+        <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
+        `,
     };
 
     transporter.sendMail(verify).then(() => 
