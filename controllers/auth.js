@@ -134,11 +134,24 @@ const resendVerifyEmail = async (req, res) => {
     const verify = {
         to: email,
         from: 'dmitry.schevchenko.work@gmail.com',
-        title: 'Medicine service',
-        subject: "Verify email",
+        subject: "Medicine service verify email",
         html: `
-        <h1 style={{color: 'gray', fontWeight: '600', fontSize: '18px'}}>Verify email</h1>
-        <img src="../images/medical-history-doctor-svgrepo-com.svg" width='100px' height='100px'>
+        <style>
+
+            h1 {
+                color: 'gray'; 
+                font-weight: '600'; 
+                font-size: '18px';
+            }
+
+            svg {
+                width='100px';
+                height='100px';
+            }
+
+        </style>
+        <h1>Verify email</h1>
+        <svg src="../images/medical-history-doctor-svgrepo-com.svg" alt='Medicine logo' border='0' width='100px' height='100px'>
         <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
         `,
     };
