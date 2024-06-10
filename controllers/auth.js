@@ -136,24 +136,44 @@ const resendVerifyEmail = async (req, res) => {
         from: 'dmitry.schevchenko.work@gmail.com',
         subject: "Medicine service verify email",
         html: `
-        <style>
+        <head>
 
-            h1 {
-                color: gray; 
-                font-weight: 600; 
-                font-size: 18px;
-            }
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-            svg {
-                width: 100px;
-                height: 100px;
-            }
+            <style>
 
-        </style>
-        <h1>Verify email</h1>
-        <svg src="https://pill-server.onrender.com/images/medical-history-doctor-svgrepo-com.svg" alt='Medicine logo' border='0' width='100px' height='100px'>
-        <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
+                h1 {
+                    color: gray; 
+                    font-weight: 600; 
+                    font-size: 18px;
+                }
+
+                svg {
+                    width: 100px;
+                    height: 100px;
+                }
+
+                a {
+                    color: orange;
+                }
+
+            </style>
+
+        </head>
+        <body>
+
+            <h1>Verify email</h1>
+            <svg src="cid:bottle" alt='Medicine logo' border='0' width='100px' height='100px'>
+            <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
+
+        </body>
         `,
+        attachments: [{
+            filename: 'medical-history-doctor-svgrepo-com.svg',
+            path: '../images/medical-history-doctor-svgrepo-com.svg',
+            cid: 'bottle' //same cid value as in the html img src
+        }]
     };
 
     transporter.sendMail(verify).then(() => 
