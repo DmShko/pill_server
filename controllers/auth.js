@@ -141,6 +141,12 @@ const resendVerifyEmail = async (req, res) => {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        </head>
+        <body>
+
+            <h1 style{{fontSize: '18px', fontWeight: '600', color: 'orange'}}>Verify email</h1>
+                <img src="cid:bottle" alt='Medicine logo' width='100px' height='100px'>
+            <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
             <style>
 
                 h1 {
@@ -159,16 +165,6 @@ const resendVerifyEmail = async (req, res) => {
                 }
 
             </style>
-
-        </head>
-        <body>
-
-            <h1 style{{fontSize: '18px', fontWeight: '600', color: 'orange'}}>Verify email</h1>
-            <image width="200" height="200">
-                <svg src="cid:bottle" alt='Medicine logo' width='100px' height='100px'>
-            </image>
-            <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
-
         </body>
         `,
         attachments: [{
