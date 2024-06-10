@@ -21,8 +21,6 @@ authRouter.get("/verify/:verificationCode", controllers.verifyEmail);
 // verify againe if the letter did not arrive
 authRouter.post("/verify", validateBody(schemas.emailSchema), controllers.resendVerifyEmail);
 
-authRouter.post("/forgot", validateBody(schemas.emailSchema), controllers.forgotVerifyEmail);
-
 // logOut
 authRouter.post("/logout", authentificate, controllers.logout);
 
