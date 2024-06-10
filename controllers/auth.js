@@ -139,19 +139,19 @@ const resendVerifyEmail = async (req, res) => {
         <style>
 
             h1 {
-                color: 'gray'; 
-                font-weight: '600'; 
-                font-size: '18px';
+                color: gray; 
+                font-weight: 600; 
+                font-size: 18px;
             }
 
             svg {
-                width='100px';
-                height='100px';
+                width: 100px;
+                height: 100px;
             }
 
         </style>
         <h1>Verify email</h1>
-        <svg src="../images/medical-history-doctor-svgrepo-com.svg" alt='Medicine logo' border='0' width='100px' height='100px'>
+        <svg src="https://pill-server.onrender.com/images/medical-history-doctor-svgrepo-com.svg" alt='Medicine logo' border='0' width='100px' height='100px'>
         <a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}">Click verify email</a>
         `,
     };
